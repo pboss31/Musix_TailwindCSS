@@ -1,0 +1,160 @@
+$pink : #F8567B;
+$black : #1D1D1D;
+
+* {
+    font-family: 'Exo 2', sans-serif;
+    font-style: italic;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+ }
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background: #f7f7f7;
+}
+
+header {
+    width: 100%;
+    // position: fixed; 
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 2;
+    padding: 3rem;
+
+}
+
+.logo {
+    img{
+        height: 6rem;
+    }
+}
+    nav {
+        ul{
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+
+            li {
+                margin: 0 3.6rem;
+
+                a {
+                    font-size: 2rem;
+                    text-decoration: none;
+                    color: $black;
+
+                    &:hover{
+                        color: $pink;
+                    }
+                }
+            }
+        }
+    }
+.images{
+        margin-top: -5rem;
+
+        img {
+            width: 40vw;
+        }
+    }
+.container1 {
+    height: 100vh;
+    width: 100vw;
+    background:url(/media/wave.png) no-repeat;
+    background-size: 100% 10rem;
+    background-position: bottom;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .images{
+        margin-top: -5rem;
+
+        img {
+            width: 40vw;
+        }
+    }
+    .content {
+        margin-top: 13rem;
+        width: 40vw;
+        animation: animate 1s ease 1;
+
+        h1 {
+            font-size: 5rem;
+            color: $black;
+        }
+        h3 {
+            font-size: 2.3rem;
+            color: $pink;
+            margin: 1rem 0;
+        }
+        p {
+            font-size: 1.3rem;
+            color: $black;
+        }
+        .buttons {
+            button{
+                height: 6rem;
+                width: 16rem;
+                background: $pink;
+                color: $black;
+                border-radius: 5rem;
+                outline: none;
+                cursor: pointer;
+                font-size: 1.8rem;
+                margin: 2rem 0;
+                border : none;
+
+                &:hover {
+                    background : $black;
+                    color: $pink;
+                }
+            }
+            a:nth-child(2) button {
+                margin-left: 2rem;
+            }
+        }
+        .icon {
+            width: 15rem;
+            display: flex;
+            justify-content: space-between;
+
+            a{
+                text-decoration: none;
+                color: $black;
+                font-size: 2.7rem;
+
+                &:hover {
+                    color : $pink;
+                }
+            }
+        }
+
+    }
+
+}
+
+.joke{
+    margin-top: -20rem;
+    margin-left: 18rem;
+    img {
+        width: 10vw;
+    }
+}
+
+@keyframes animate {
+    0%{
+        transform: translateY(5rem);
+    }
+    100%{
+        transform: translateY(0rem);
+    }
+}

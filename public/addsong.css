@@ -1,0 +1,73 @@
+#profile-upload{
+	background-image:url('');
+    background-size:cover;
+    background-position: center;
+    height: 180px; width: 180px;
+    border: 2px solid #FB98AD;
+    position:relative;
+  border-radius:15px;
+  overflow:hidden;
+  font-size: 36px;
+}
+#profile-upload:hover input.upload{
+  display:block;
+}
+#profile-upload:hover .hvr-profile-img{
+  display:inline-block;
+ }
+#profile-upload .fa{   margin: auto;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    text-align: center;
+    right: 0;
+    padding: 6px;
+   opacity:1;
+   transition:opacity 1s linear;
+   transform: scale(.75); 
+ 
+ 
+}
+#profile-upload:hover .fa{
+   opacity:1;
+   transform: scale(1.25); 
+}
+#profile-upload input.upload {
+    z-index:1;
+    left: 0;
+    margin: 0;
+    bottom: 0;
+    top: 0;
+    padding: 0;
+    opacity: 0;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    background:#ccc;
+    width:100%;
+    display:none;
+}
+
+#profile-upload .hvr-profile-img {
+  width:100%;
+  height:100%;
+  display: none;
+  position:absolute;
+  vertical-align: middle;
+  position: relative;
+  background: transparent;
+ }
+#profile-upload .fa:after {
+    content: "";
+    position:absolute;
+    bottom:0; left:0;
+    width:100%; height:0px;
+    background: #8c949b;
+	opacity: 0.5;
+    transition: height 0.3s;
+    }
+
+#profile-upload:hover .fa:after { 
+	height:200%; 
+}
+

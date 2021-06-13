@@ -1,0 +1,91 @@
+
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sidebar.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   
+<body>
+  <div class="sidebar">
+    <div class="logo_content">
+      <a href="/main">
+      <div class="logo">
+        <img src="/media/logo4.png">
+        <!-- <div class="logo_name"></div> -->
+      </div>
+    </a>
+      <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <ul class="nav_list">
+      <li>
+          <i class='bx bx-search' ></i>
+          <input type="text" class="placeholder-gray-500" placeholder="songs,artist,albums">
+        <span class="tooltip">Search</span>
+      </li>
+      <li>
+        <a href="/main">
+          <i class='bx bx-home-alt'></i>
+          <span class="links_name">Home</span>
+        </a>
+        <span class="tooltip">Home</span>
+      </li>
+      <li>
+        <a href="/profile">
+          <i class='bx bx-user' ></i>
+          <span class="links_name">Profile</span>
+        </a>
+        <span class="tooltip">Profile</span>
+      </li>
+      <li>
+        <a href="/album">
+          <i class='bx bx-heart' ></i>
+          <span class="links_name">Favorite</span>
+        </a>
+        <span class="tooltip">Favorite</span>
+      </li>
+      <li>
+        <a href="/addsong">
+          <i class='bx bxs-disc' ></i>
+          <span class="links_name">Upload songs</span>
+        </a>
+        <span class="tooltip">Upload songs</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-user-x' ></i>
+          <span class="links_name">user manager</span>
+        </a>
+        <span class="tooltip">user manager</span>
+      </li>
+    </ul>
+    <div class="animated_content">
+      <div class="animated">
+      <img src="/media/listen.svg" alt="">
+    </div>
+    </div>
+  </div>
+  </div>
+</body>
+
+  <script>
+   let btn = document.querySelector("#btn");
+   let sidebar = document.querySelector(".sidebar");
+   let searchBtn = document.querySelector(".bx-search");
+
+   btn.onclick = function() {
+     sidebar.classList.toggle("active");
+     if(btn.classList.contains("bx-menu")){
+       btn.classList.replace("bx-menu" , "bxs-chevrons-left");
+     }else{
+       btn.classList.replace("bxs-chevrons-left", "bx-menu");
+     }
+   }
+   searchBtn.onclick = function() {
+     sidebar.classList.toggle("active");
+   }
+  </script>
+
+</body>
+</html>
