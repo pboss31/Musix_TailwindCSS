@@ -1,0 +1,129 @@
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+  
+  .navcolor {
+    background-color: #1d1d1d;
+}
+
+:root {
+    --gray-700: #00000080;
+    --gray-600: #121212;
+    --gray-500: rgba(0,0,0,.7);
+    --gray-400: #404040;
+    --gray-300: hsla(0,0%,100%,.6);
+    --gray-200: #282828;
+    --gray-100: #b3b3b3;
+    --bg-liked-songs: linear-gradient(135deg,#450af5,#c4efd9);
+    --green-100: #1ed760;
+    --green-200: #1db954;
+  }
+  @font-face{
+    font-family:spotify-circular;
+    src:url(https://open.scdn.co/cdn/fonts/CircularSpUIv3T-Light.afd9ab26.woff2) format("woff2"),
+    url(https://open.scdn.co/cdn/fonts/CircularSpUIv3T-Light.2a78c017.woff) format("woff"),
+    url(https://open.scdn.co/cdn/fonts/CircularSpUIv3T-Light.89e4be2e.ttf) format("truetype");
+    font-weight:200;
+    font-style:normal;
+    font-display:swap
+  }
+  @font-face {
+    font-family:spotify-circular;
+    src:url(https://open.scdn.co/cdn/fonts/CircularSpUIv3T-Book.3466e0ec.woff2) format("woff2"),
+    url(https://open.scdn.co/cdn/fonts/CircularSpUIv3T-Book.ea8d19db.woff) format("woff"),
+    url(https://open.scdn.co/cdn/fonts/CircularSpUIv3T-Book.a357677a.ttf) format("truetype");
+    font-weight:400;
+    font-style:normal;
+    font-display:swap;
+  }
+  html,
+  body {
+    height: 100%;
+    background-color: var(--gray-200);
+    font-family: 'spotify-circular'
+  }
+
+  .bg-gray-700 {
+    background-color: var(--gray-700);
+  }
+  
+  .bg-gray-200 {
+    background-color: var(--gray-200);
+  }
+  
+  .bg-gray-500 {
+    background-color: var(--gray-500);
+  }
+  
+  .bg-gray-600 {
+    background-color: var(--gray-600);
+  }
+  
+  .bg-green-200 {
+    background-color: var(--green-200);
+  }
+  
+  .bg-liked-songs {
+    background-image: var(--bg-liked-songs);
+  }
+  
+  .hover\:border-green-200:hover {
+    border-color: var(--green-200);
+  }
+  
+  .border-gray-100 {
+    border-color: var(--gray-100);
+  }
+  
+  .border-gray-200 {
+    border-color: var(--gray-200);
+  }
+  
+  .border-gray-300 {
+    border-color: var(--gray-300);
+  }
+  
+  .border-gray-400 {
+    border-color: var(--gray-400);
+  }
+  
+  .text-2xl {
+    font-size: 1.75rem;
+  }
+  
+  .text-gray-100 {
+    color: var(--gray-100)
+  }
+  
+  .text-green-200 {
+    color: var(--green-200);
+  }
+  
+  .w-7 {
+    width: 1.75rem;
+  }
+  
+  .w-14 {
+    width: 3.5rem;
+  }
+  
+  .h-7 {
+    height: 1.75rem;
+  }
+  
+  .h-14 {
+    height: 3.5rem;
+  }
+  
+  .pt-full {
+    padding-top: 100%;
+  }
+  
+  .text-line-clamp-1 {
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+    word-break: break-all;
+      overflow: hidden;
+  }
+  

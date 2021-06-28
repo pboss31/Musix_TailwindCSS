@@ -2,10 +2,10 @@
 	background-image:url('');
     background-size:cover;
     background-position: center;
-    height: 180px; width: 180px;
+    height: 225px; width: 225px;
     border: 2px solid #FB98AD;
     position:relative;
-  border-radius:15px;
+  border-radius:45px;
   overflow:hidden;
   font-size: 36px;
 }
@@ -15,9 +15,10 @@
 #profile-upload:hover .hvr-profile-img{
   display:inline-block;
  }
-#profile-upload .fa{   margin: auto;
+#profile-upload .fa{   
+    margin:auto;
     position: absolute;
-    bottom: -4px;
+    bottom: -2px;
     left: 0;
     text-align: center;
     right: 0;
@@ -71,3 +72,6 @@
 	height:200%; 
 }
 
+.bgadd {
+  background-color:#eeb5c1;
+}

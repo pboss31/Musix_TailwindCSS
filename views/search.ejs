@@ -1,0 +1,121 @@
+<%- include('partials/header.ejs') %>
+<%- include('partials/sidebar.ejs') %>
+<%- include('partials/navbar.ejs') %>
+            
+
+
+
+            <div class="content1 container my-48 mx-auto px-4 md:px-12 bg-transparent">
+              <div class="flex flex-wrap -mx-1 lg:-mx-4">
+                <div class="sm:mx-full sm:w-full sm:max-full ">
+                  <h2 class="mt-6 text-3xl font-extrabold text-left text-white leading-9">
+                    Search result : 
+                  </h2>
+                  <h3 class="mt-6 text-3xl font-extrabold text-left text-white leading-9">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 hover:text-pink-300 " viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z" />
+                    </svg>
+                  </h3>
+                  
+                </div>
+                <% word.forEach(song => { %>
+                  <div class="my-1 px-1 w-full h-1/4 md:w-1/4 sm-1/2 lg:my-4 lg:px-4 lg:w-1/6">
+          
+                      <article class="overflow-hidden rounded-lg shadow-lg">
+          
+                          <a href="#">
+                              <img alt="Placeholder" class="object-cover h-72 w-full " src="<%= song.cover %>">
+                          </a>
+          
+                          <header class="flex items-center justify-between leading-tight p-2 md:p-4 bg-gray-600">
+                              <h1 class="text-lg">
+                                  <a class="no-underline hover:underline text-white ml-2" href="#">
+                                    <%= song.name %>
+                                  </a>
+                              </h1>
+                              <p class="text-white text-sm">
+                                <%= song.genre %>
+                              </p>
+                          </header>
+          
+                          <footer class="flex items-center justify-between leading-none p-2 md:p-4 bg-pink-300">
+                            <p class="ml-2 text-xl object-fit">
+                                <%= song.artist %>
+                              </p> 
+                              <% if(currentUser.rank !== "Premium" ) {%>
+                                <% } else { %> 
+
+                            <a download class="flex items-center no-underline hover:text-blue-600 text-black text-2xl" href="<%= song.file %>">
+                                <i class='bx bxs-download' ></i>
+                              </a>
+                              <%    }%>
+                              
+                                
+                                <a class="no-underline text-gray-600 hover:text-red-600 text-xl " href="/favorite/add/<%= song.id %>">
+                                    <span class="hidden">Like</span>
+                                    <i class="fa fa-heart"></i>
+                                </a>
+                                
+
+                          </footer>
+          
+                      </article>
+          
+                  </div>
+                  <%})%>
+    <div >
+      <h2 class="mt-6 text-3xl font-extrabold text-left text-white leading-9">
+        sorted result : 
+      </h2>
+      <% sorted.forEach(song => { %>
+        <div class="my-1 px-1 w-full h-1/4 md:w-1/4 sm-1/2 lg:my-4 lg:px-4 lg:w-1/6">
+
+            <article class="overflow-hidden rounded-lg shadow-lg">
+
+                <a href="#">
+                    <img alt="Placeholder" class="object-cover h-72 w-full " src="<%= song.cover %>">
+                </a>
+
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4 bg-gray-600">
+                    <h1 class="text-lg">
+                        <a class="no-underline hover:underline text-white ml-2" href="#">
+                          <%= song.name %>
+                        </a>
+                    </h1>
+                    <p class="text-white text-sm">
+                      <%= song.genre %>
+                    </p>
+                </header>
+
+                <footer class="flex items-center justify-between leading-none p-2 md:p-4 bg-pink-300">
+                  <p class="ml-2 text-xl object-fit">
+                      <%= song.artist %>
+                    </p> 
+                    <% if(currentUser.rank !== "Premium" ) {%>
+                      <% } else { %> 
+
+                  <a download class="flex items-center no-underline hover:text-blue-600 text-black text-2xl" href="<%= song.file %>">
+                      <i class='bx bxs-download' ></i>
+                    </a>
+                    <%    }%>
+                    
+                      
+                      <a class="no-underline text-gray-600 hover:text-red-600 text-xl " href="/favorite/add/<%= song.id %>">
+                          <span class="hidden">Like</span>
+                          <i class="fa fa-heart"></i>
+                      </a>
+                      
+
+                </footer>
+
+            </article>
+
+        </div>
+        <%})%>
+                  </div>
+          </div>
+            </div>
+
+            </body>
+          
+        

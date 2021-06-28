@@ -1,0 +1,49 @@
+
+
+<header class="px-6 py-8 mb-6 bg-gray-600 flex items-center justify-between sticky top-0 z-10">
+          <div class="flex items-center pl-36">
+            <button class="h-8 w-8 bg-gray-500 rounded-full text-white flex mr-4 ">
+              <a href="/main"></a>
+              <svg class="h-5 w-5 m-auto" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M15.54 21.15L5.095 12.23 15.54 3.31l.65.76-9.555 8.16 9.555 8.16"></path>
+              </svg>
+            
+            </button>
+            <button class="h-8 w-8 bg-gray-500 rounded-full text-white flex">
+              <svg class="h-5 w-5 m-auto" viewBox="0 0 24 24">
+                <path fill="currentColor"d="M7.96 21.15l-.65-.76 9.555-8.16L7.31 4.07l.65-.76 10.445 8.92"></path>
+              </svg>
+            </button>
+          </div>
+          <div>
+            <% if(currentUser.rank !== "Member" ) {%>
+                <% } else { %> 
+            <a class="cursor-pointer  rounded-full py-3 px-6 border-2 border-solid border-pink-300 text-body1 sm:text-body2 text-primary hidden sm:inline mx-3 mr-12 text-2xl text-white hover:text-gray-800 hover:bg-pink-300" href="/premium">
+                Premium
+            </a>
+            <%    }%>
+            <button class="text-xl justify-between text-white bg-gray-500 rounded-full p-px pr-3 md:h-14 md:w-44 object-fill" id="menu-btn">
+              <img src="<%= currentUser.profile %>" class="w-11 h-11 inline-block rounded-full  "/>
+              <%= currentUser.username %><i class='bx bxs-chevron-down'></i> 
+            </button>
+            <div class="bg-gray-200 hidden flex-col rounded mt-1 p-2 text-sm w-full" id="dropdown">
+              <a href="/profile" class="px-2 py-1 hover:bg-pink-300 rounded text-white">account</a>
+              <a href="/logout" class="px-2 py-1 hover:bg-pink-300 rounded text-white">logout</a>
+          </div>
+            
+          </div>
+        </header>
+  
+        <script>
+          window.addEventListener('DOMContentLoaded', ()=> {
+              const menuBtn = document.querySelector('#menu-btn')
+              const dropdown = document.querySelector('#dropdown')
+              
+              menuBtn.addEventListener('click', () => {
+          
+                  dropdown.classList.toggle('hidden')
+                  dropdown.classList.toggle('flex')
+              })
+  
+          })
+      </script>

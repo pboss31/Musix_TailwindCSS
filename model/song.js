@@ -4,13 +4,16 @@ var SongSchema = new mongoose.Schema
 (
     {
         name: String,
-        // lyrics: String,
         artist: String,
-        // album: String,
         genre: String,
         cover: String,
         file: String,
-        favorites: String
+        viewer:{
+            type: Number,
+            default:0
+        },
+        favorite: String,
+        
     }
 );
 

@@ -1,3 +1,6 @@
+const song = require('./model/song.js');
+const user = require('./model/user.js');
+
 const   bodyParser      = require('body-parser'),
         mongoose        = require('mongoose'),
         express         = require('express'),
@@ -5,7 +8,7 @@ const   bodyParser      = require('body-parser'),
         LocalStrategy   = require('passport-local'),
         passport        = require('passport'),
         User            = require('./model/user.js'),
-        Song            = require('./model/song.js')
+        Song            = require('./model/song.js'),
         multer          = require('multer'),
         path            = require('path'),
         storage         = multer.diskStorage({
@@ -58,7 +61,7 @@ app.use(function(req,res,next){
 });
 
 app.post('/register', function(req, res){
-    var newUser = new User({username: req.body.username});
+    var newUser = new User({username: req.body.username,email: req.body.email});
     User.register(newUser, req.body.password, function(err, user){
         if(err) {
             console.log(err);
@@ -98,17 +101,18 @@ app.get('/logout', function(req, res){
     res.redirect('/');
 });
 
-app.get('/main', isLoggedIn, function(req,res){
-    Song.find({}, function(err, img){
-        if(err) {
-            console.log(err);
-        }
-        else { 
-            res.render('index.ejs', {send:img});
-        }
-    })
-
-});
+app.get('/main', isLoggedIn, async function(req,res){
+    var favoritelist = new Array(req.user.favorite.length);
+    for(let i=0;i< req.user.favorite.length ; i++){
+        favoritelist[i] = req.user.favorite[i].toString();
+    }
+    const newrel = await Song.find({}).sort({"_id":-1}).limit(6).exec();
+    const song = await Song.find({}).limit(6).exec();
+    const mostfav = await Song.find({}).sort({"viewer":-1}).limit(6).exec();
+    const random = await Song.aggregate([{$sample:{size:6}}]).exec();
+    res.render('index.ejs', {song:song,songnew:newrel,getfav:favoritelist,fav:mostfav,randsong:random});
+})
+   
 
 app.get('/', function(req, res) {
     res.render('home.ejs');
@@ -126,12 +130,21 @@ app.get('/main', function(req, res) {
     res.render('index.ejs');
 })
 
-app.get('/album', function(req, res) {
-    res.render('album.ejs');
+app.get('/favorite', function(req, res) {
+    User.findById(req.user.id).populate('favorite').exec(function(err,getsongdata){
+        if(err){
+        console.log(err);
+        }
+        else if(getsongdata){
+            console.log(getsongdata.favorite);
+            res.render('favorite.ejs',{favdata: getsongdata.favorite});
+        }
+    })
 })
 
-app.get('/main/songid', function(req, res) {
-    res.render('songdt.ejs');
+app.get('/song/:songid',async function(req,res){
+    const songdesc = await Song.findById(req.params.songid).exec();
+    res.render('songdt.ejs',{song:songdesc});
 })
 
 app.get('/addsong', function(req, res) {
@@ -140,6 +153,122 @@ app.get('/addsong', function(req, res) {
 
 app.get('/profile', function(req, res) {
     res.render('profile.ejs');
+})
+
+app.get('/usermanager',async function(req,res) {
+    var allUser = await User.find({}).exec();
+    res.render('usermanager.ejs',{user:allUser});
+
+})
+
+app.get('/usermanager/remove/:id' ,function(req,res){
+    User.findByIdAndDelete(req.params.id,function(err,getremove){
+        if(err){
+            console.log(err);
+        }
+        else if(getremove){
+            res.redirect('/usermanager');
+        }
+    })
+})
+
+app.get('/premium', function(req, res) {
+    res.render('premium.ejs');
+})
+
+app.get('/search/:key', function(req, res) {
+    var key = req.params.key;
+    var capkey = key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();
+    Song.find(
+        {$or:[{name:{$regex:'.*' + key + '.*'}},{name:{$regex:'.*' + key.toUpperCase() + '.*' }},{name:{$regex:'.*' + key.toLowerCase()}},{name:{$regex:'.*' + capkey + '.*'}}]}, function(err,words){
+        if(err) {
+            console.log(err);
+        }
+        else if(words) { 
+            Song.find(
+                {$or:[{name:{$regex:'.*' + key + '.*'}},{name:{$regex:'.*' + key.toUpperCase() + '.*' }},{name:{$regex:'.*' + key.toLowerCase()}},{name:{$regex:'.*' + capkey + '.*'}}]}, function(err,sorted){
+                if(err) {
+                    console.log(err);
+                }
+                else {
+                    res.render('search.ejs',{word:words,sorted:sorted});
+                }
+                }).sort({"name": 1})
+        }
+        })
+    
+})
+
+app.get('/favorite/add/:id', function(req, res) {
+    var id = req.params.id;
+    User.findById(req.user.id, function(err,getusers){
+        if(err) {
+            console.log(err);
+        }
+        else if (getusers) {
+            song.findById(id,function(err,getsong){
+                if(err){
+                console.log(err);
+                }
+                else if(getsong){
+                    getusers.favorite.push(getsong.id);
+                    getusers.save();
+                    Song.findByIdAndUpdate(getsong.id,{$inc:{viewer:1}},function(err,updatefav){
+                        if(err){
+                            console.log(err);
+                        }
+                        else if(updatefav){
+                            res.redirect('/main');
+                        }
+                    })
+                }
+                else {
+                    res.redirect('/main');
+                }
+            })
+        }
+    })
+})
+
+app.get('/favorite/remove/:id', isLoggedIn, function(req,res){
+    var id = req.params.id;
+    User.findByIdAndUpdate(req.user.id,{$pull: {favorite:id}},function(err,delfav){
+        if(err){
+            console.log(err);
+        }
+        else if(delfav){
+            Song.findByIdAndUpdate(id,{$inc:{viewer:-1}},function(err,updatefav){
+                if(err){
+                    console.log(err);
+                }
+                else if(updatefav){
+                    res.redirect('/main');
+                }
+            })
+        }
+    })
+})
+
+
+app.post('/search', function(req, res){
+    var search = req.body.key;
+    res.redirect('/search/' + search);
+})
+
+app.get("/premiumget", function(req, res){
+    var rankup = {$set: {rank : "Premium" }};
+    User.findByIdAndUpdate(req.user._id,{$set: {rank : "Premium" }}, function(err,user){
+        if(err) {
+            console.log(err);
+        }
+        else {
+            res.redirect("/main");
+        }
+    })
+})
+
+app.get('/egg', function(req, res) {
+    res.render('egg.ejs');
 })
 
 

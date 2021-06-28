@@ -26,6 +26,15 @@
 .sidebar.active{
   width: 240px
 }
+
+.sidebar.active ~.content1{
+  margin-right: 60px;
+}
+
+.sidebar.active ~.content2{
+  margin-left: 280px;
+}
+
 .sidebar .logo_content .logo{
   color: #fff;
   display: flex;
@@ -193,3 +202,7 @@
   pointer-events: none;
 }
 
+.bgbp{
+  background-color: #FB98AD;
+}
+  

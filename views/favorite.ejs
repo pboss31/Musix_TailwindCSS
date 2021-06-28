@@ -1,0 +1,51 @@
+<%- include('partials/header.ejs') %>
+<%- include('partials/sidebar.ejs') %>
+<%- include('partials/navbar.ejs') %>
+
+<link rel="stylesheet" href="/css/favorite.css">
+
+<div class="m-6 ml-52 mt-36 ">
+  
+  <div class="flex">
+    <img class="dailyimg mr-6 rounded-lg" src="https://i.pinimg.com/originals/e0/fd/ed/e0fdedea3dbc38241f2f3a89eff36f3d.png">
+    <div class="flex flex-col justify-center">
+      <!-- content -->
+      <h4 class="mt-0 mb-2 ml-2 uppercase text-gray-500 tracking-widest text-xl">That your favorite?</h4>
+      <h1 class="mt-0 mb-2 text-white text-6xl">Favorite Mix</h1>
+      <p class="text-white text mb-2 text-xl">The hottest songs you need to listen to right now. Cover: Mariya Takeuchi </p>
+      <p class="text-white text-xl">Favorite <a>songs</a>  <a>Musix</a> </p>
+    </div>
+  </div>
+  
+  <div class="mt-6 flex justify-between">
+    <div class="flex">
+      <!-- <button class="mr-2 bg-green-500 text-green-100 block py-3 px-9 rounded-full text-3xl hover:bg-pink-400 hover:text-gray-700">PLAY</button> -->
+      <!-- <button class="mr-2 border border-white block p-2 rounded-full"><img src="https://image.flaticon.com/icons/png/512/2913/2913124.png" height="25" width="25"></button>
+      <button class="mr-2 border border-white block p-3 rounded-full py-3 px-6 text-white">...</button> -->
+    </div>
+  </div>
+
+  <div class="mt-10">
+    <div class="pt-6 flex text-white text-3xl">
+      <div class="p-2 w-8 flex-shrink-0"></div>
+      <div class="p-2 w-8 flex-shrink-0"></div>
+      <div class="p-2 w-full">Title</div>
+      <div class="p-2 w-full">Artist</div>
+      <div class="p-2 w-full">Genre</div>
+      <div class="p-2 w-12 flex-shrink-0 text-right">Download</div>
+    </div>
+    
+    
+    <% favdata.forEach(function (fav) {%>
+      <div class="flex border-b  border-pink-300 hover:bg-gray-200 text-white hover:text-gray-800 text-2xl ">
+            <div class="p-2 w-8 flex-shrink-0 hover:text-blue-400 mr-2"><a href="/song/<%= fav.id %>"><i class='bx bx-play-circle'></i></a></div>
+            <div class="p-2 w-8 flex-shrink-0 text-red-700 hover:text-gray-400"><i class='bx bxs-heart' ></i></div>
+            <div class="p-2 w-full"><%= fav.name %></div>
+            <div class="p-2 w-full"><%= fav.artist %></div>
+            <div class="p-2 w-full"><%= fav.genre %></div>
+            <div class="p-2 w-12 flex-shrink-0 text-right"><i class='bx bxs-download' ></i></div>
+          </div>
+      <% }) %>
+    
+  </div>
+</div>  
